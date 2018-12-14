@@ -17,20 +17,13 @@ import com.qa.persistence.domain.Trainer;
 
 @RequestMapping("${URL.base}")
 @RestController
-public class TrainerEndpoint {
+public class Endpoint {
 
 	@Autowired
 	private TrainerService service;
 
-	public TrainerEndpoint(TrainerService service) {
-		this.service = service;
-	}
-
-	public TrainerEndpoint() {
-	}
-
 	@GetMapping("${URL.method.Trainer.getByUserName}/{username}")
-	public Optional<Trainer> getTrainer(@PathVariable String username) {
+	public Optional<Trainer> getTrainer(@PathVariable("username") String username) {
 		return service.get(username);
 	}
 
@@ -40,7 +33,7 @@ public class TrainerEndpoint {
 	}
 
 	@DeleteMapping("${URL.method.Trainer.delete}/{username}")
-	public String deleteTrainer(@PathVariable String username) {
+	public String deleteTrainer(@PathVariable("username") String username) {
 		return service.delete(username);
 	}
 
@@ -49,8 +42,8 @@ public class TrainerEndpoint {
 		return service.create(trainer);
 	}
 
-	@PutMapping("${URL.method.Trainer.update}/{trainerID}")
-	public String updateTrainer(@PathVariable String username, @RequestBody Trainer trainer) {
+	@PutMapping("${URL.method.Trainer.update}/{username}")
+	public String updateTrainer(@PathVariable("username") String username, @RequestBody Trainer trainer) {
 		return service.update(username, trainer);
 	}
 }
